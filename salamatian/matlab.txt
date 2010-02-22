@@ -1,0 +1,393 @@
+%-- 23/10/09 9.05 --%
+clc
+L'*L
+p=((L'*L)^(-1))*L'*zlinear;
+p
+Kt
+V0
+p=zlinear/L;
+p2=L\z;
+p2=L\zlinear;
+p2=zlinear\L;
+p2
+close all
+Cov
+transpose(L)*inv(Cov)*L
+transpose(L)*inv(Cov)
+size(L)
+size(Cov)
+Cov_p
+sigma_p
+p_est=zlinear\L;
+p_est
+p
+delta_p
+Ktp
+V0p
+Vconf=[Ktp(1)*z+V0p(1),Ktp(2)*z+V0p(2)];
+Vconf
+V0p
+Vmin=min([Ktp(1)*z,Ktp(2)*z]);
+Vmin
+Vmin=min([Ktp(1)*z,Ktp(2)*z],2);
+Vmin
+[Ktp(1)*z,Ktp(2)*z]
+Vmin=min([Ktp(1)*z,Ktp(2)*z],[],2);
+Vmin
+(zlinear-L*p)
+L*p
+size(L)
+size(p)
+p=L\z;
+p
+format long
+p
+pol
+p
+z
+z_est
+p(4)
+Vz
+A
+load sensore.mat
+figure,plot(z,Vz,'o')
+zl=z(11:36);
+Vzl=Vz(11:36);
+L=[Vzl,ones(length(Vzl),1)];
+%p=((L'*L)^(-1))*L'*zlinear;
+p_est=L\zl;
+Kt=1/v(1);
+V0=-v(2)/v(1);
+V_est=Kt*z+V0;
+figure,plot(z,Vz,'o')
+%set(gca,'Linestyle','none','Marker','o');
+hold on
+plot(z,V_est,'r')
+%Set membership:
+e=5e-4;
+A=(L'*L)*(-1)*L';
+clear]
+clc
+clear
+clc
+close all
+A
+v
+vm
+vM
+A
+vm
+vM
+vm
+vM
+[Ktp(1)*z+V0p(2),Ktp(2)*z+V0p(1)]
+Ktp
+V0p
+%-- 30/10/09 9.33 --%
+%-- 30/10/09 9.34 --%
+%-- 30/10/09 9.38 --%
+%-- 30/10/09 10.56 --%
+%-- 30/10/09 11.31 --%
+%-- 11/02/10 13.49 --%
+x = 1:1000;
+y = [];
+y(0)=1;
+y[0]=1;
+y(1)=1;
+for i=1:100
+end;
+for i=2:100
+y(n)=y(n-1)-4*y(n-2)+4*y(n-3)+x(n);
+end;
+y = [1 2 3];
+ddd;
+clear
+A = [1 -4 4; 1 0 0; 0 1 0];
+A = [1 -4 4; 1 0 0; 0 1 0]
+y
+y = [1 2 3];
+B = [1 0 0]
+B = [1; 0; 0]
+y = [1; 2; 3];
+y1 = [1; 2; 3];
+y = A*y1 + B
+y1 = [1; 2; 0];
+x = [ 2 34 566]
+x = [ 2 34 566]'
+x = [ 2 34 566]
+y = A*y1 + B*x;
+A
+y1
+B
+x
+y = A*y1 + B*x;
+A*y1
+B*x;
+B*x
+x = [ 2 ]
+y = A*y1 + B*x;
+y = A*y1 + B*x
+x = [ 0 ]
+y = A*y1 + B*x
+y1 = [0; 0; 0];
+y = A*y1 + B*x
+x
+x = [ 3 ]
+y = A*y1 + B*x
+x
+help fdatool
+fdatool
+ztrans(y)
+cd C:\Documents and Settings\ladi02\My Documents\Download
+cd C:/Documents and Settings/ladi02/My Documents/Download
+pwd
+cd ..
+cd Download\
+load Y.dat
+Y
+Y(:,2)
+plot(Y(:,2))
+help aryrul
+help aryrule
+help aryule
+A = aryule(Y(:,2), 3)
+A = aryule(Y(:,2), 4)
+A = aryule(Y(:,2), 1)
+A = aryule(Y(:,2), 0)
+A = aryule(Y(:,2), 3)
+help freqz
+A
+B
+AAAA = [1 -4 4; 1 0 0;0 1 0]
+A = aryule(Y(:,2), 3)
+help freqz
+freqz(1.0000   -0.8486   -0.0645   -0.0837)
+freqz([1.0000   -0.8486   -0.0645   -0.0837])
+A = aryule(Y(:,2), 9999)
+A = aryule(Y(:,2), 99)
+freqz(A)
+A = aryule(Y(:,2), 1)
+freqz(A)
+A = aryule(Y(:,2), 99)
+freqz(A)
+freqz(1,A)
+plot(Y(:,2))
+freqz(1,A)
+plot(Y(:,2))
+A = aryule(Y(:,2), 10)
+freqz(1,A)
+help ayrule
+help aryule
+[A, Z] = aryule(Y(:,2), 10)
+for i=1:10
+[a,z(i+1)] = aryule(Y(:,2),i+1);
+end
+z
+plot(z)
+plot(z(2:n))
+plot(z(2:end))
+for i=1:99
+[a,z(i+1)] = aryule(Y(:,2),i+1);
+end
+plot(z)
+plot(z(2:end))
+help zplane
+Y
+A
+zplane(1,A)
+for i=1:10
+[a,z(i+1)] = aryule(Y(:,2),i+1);
+end
+plot(z(2:n))
+plot(z(2:end))
+A = aryule(Y(:,2), 2)
+zplane(1,A)
+A = aryule(Y(:,2), 10)
+A = aryule(Y(:,2), 99)
+zplane(1,A)
+var(Y(:,2))
+e
+E
+z
+Z
+var(Y(:,2))
+E
+Z
+X
+X=Z
+[m,n] = size(Y(:,2))
+Y(:,2)
+[n,m ] = size(Y(:,2))
+variancex = var(X)
+X
+variancex = var(Y(:,2))
+P=1
+X
+plot(z(2:end))
+Z
+variancee = Z
+variancex
+variancee
+k = 4
+n*log(1+variancex/P^2)-N*log(1+variancee/P^2)-32*k
+n*log(1+variancex/P^2)-n*log(1+variancee/P^2)-32*k
+[A, Z] = aryule(Y(:,2), 10)
+for i=1:10[A, Z] = aryule(Y(:,2), 10)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+variancee = var(Z)
+value(i) = n*log(1+variancex/P^2)-N*log(1+variancee/P^2)-32*k
+end
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+variancee = var(Z)
+value(i) = n*log(1+variancex/P^2)-n*log(1+variancee/P^2)-32*k
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+variancee = var(Z)
+value(i) = n*log(1+variancex/P^2)-n*log(1+variancee/P^2)-32*k
+input('')
+end
+clear value
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+variancee = var(Z)
+value(i) = n*log(1+variancex/P^2)-n*log(1+variancee/P^2)-32*k
+input('')
+end
+variancee = var(Z)
+[A, Z] = aryule(Y(:,2), 1)
+var(Z)
+var(A)
+[A, Z] = aryule(Y(:,2), 2)
+var(A)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+input('')
+end
+plot(value)
+grid on
+for i=1:99
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+input('')
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+variancex
+Z
+/k
+k
+[A, Z] = aryule(Y(:,2), i)
+[A, Z] = aryule(Y(:,2), 2)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+input('')
+end
+clear value
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+input('')
+end
+value =
+2.0908e+003
+2.0908e+0
+2.1098    2.1168    2.1220
+clear value
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+input('')
+end
+plot(value)
+for i=1:99
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+variancee = var(Z)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+end
+plot(value)
+claer value
+clear value
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log(1+variancex/P^2)-n*log(1+Z/P^2)-32*k
+end
+plot(value)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-32*k
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-32*k
+end
+plot(value)
+clear value
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-32*k
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-32*i
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-5*i
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-1*i
+end
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-99*i
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-1*i
+end
+plot(value)
+for i=1:10
+[A, Z] = aryule(Y(:,2), i)
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-1*i
+value(i) = n*log2(1+variancex/P^2)-n*log2(1+Z/P^2)-2*i
+end
+plot(value)
+processed = Y(:,2)
+processedtemp = Y(:,2)
+processed = Y(:,2)
+mean
+mean(Y(:,2))
+Y(:,2) - mean(Y(:,2))
+processed = Y(:,2) - mean(Y(:,2))
+plot(processed)
+x_normalized=x/max(abs(x));
+processed_mean = Y(:,2) - mean(Y(:,2))
+processed_normalized = processed_mean/max(abs(processed_mean));
+plot processed_normalized
+xplot processed_normalized
+plot(processed_normalized)

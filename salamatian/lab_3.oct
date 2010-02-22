@@ -1,0 +1,81 @@
+#####################3
+#
+#  Lab 3
+#
+#######################
+
+# a) Observe the second column of the variable Y. 
+
+    # Load the data
+    all_data = load Y.dat;
+
+    figure(1, "visible", "off");
+    data = all_data(:,2);
+    plot(data);
+
+    print -dpng "traffic_by_time.png" 
+
+# b) Can you assume the signal is random ? stationary ? if no why ? if yes why ? (take care the two answer can be correct, depending on the framework).
+#as a first try we will like to directly fit an AR model to these data. For this purpose we can use the matlab function aryule(see help aryule).
+
+# Yes. We can say the signal is stationary because the values do not change over time or position. They keep repeting themselfs in cycles, but always repeating the same values (broadly).
+
+##################
+#
+# Directly fit AR model
+#
+#################
+
+#c) Calibrate an order 3 AR model using the forward backward method w. Observe the frequency response of the fitted model (using the command freqz) and the pole-zero plot (using the command zplane). Continue the calibration with larger order (up to 10). Make a plot of the model error as a function of the order. How behave the marginal gain of increasing the order of the model. Compare the zero-pole diagrams when the order of the model increases.
+
+    for i=1:10
+        [ar_coeffs, NoiseVariance(i+1)] = aryule(data, i+1);
+    end
+
+    #This graph shows the decrease of noise as we go to user higher degree
+    plot(NoiseVariance)
+    print -dpng "noise_variance_degree.png" 
+
+    ## Print the zplane of 3 differente degrees
+
+    # Degree 1
+    [ar_coeffs, NoiseVariance] = aryule(data, 1);
+    zplane(1, ar_coeffs)
+    print -dpng "fit_degree_1.png" 
+
+    [ar_coeffs, NoiseVariance] = aryule(data, 5);
+    zplane(1, ar_coeffs)
+    print -dpng "fit_degree_5.png" 
+
+    [ar_coeffs, NoiseVariance] = aryule(data, 10);
+    zplane(1, ar_coeffs)
+    print -dpng "fit_degree_10.png" 
+
+# d) Choosing the order of the model
+
+# This is a question of cost vs. benefit tradeoff. We are going to present the Rissanen MDL (Minimum Description Length) approach. Let’s assume that one want to transmit N sample of data with a precision of P. He can do this by sending the raw data (X), and consumate around N*log(1+variance(X)/P^2) bits of data. He can also construct a model. Now we have to send the model parameters (let’s assume k parameter each represented with m bytes) along with the prediction error (E) resulting from the model. This will need in whole m*k+N*log(1+variance(E)/P^2) bits. So the benefit of the model in term of bits of information is equal to :
+#N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
+
+#By plotting the curve of benefit as a function of k, one can observe a curve that increase for low value of k but peaks at some point and decrease thereafter. The peak gives the more benefitial model order. 
+# Now implement the above approach. Choose a meaningful value of m and find the order of the model that maximize the benefit.
+
+    #N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
+
+    #Let's start by filling the parameters 
+    [N, M] = size(data) #N is the number of observations;
+    variance_x = var(data) #The variance of the real data;
+    P = 1;
+
+    for i=1:10
+        [ar_coeffs, NoiseVariance] = aryule(data, i);
+        value(i) = N*log2(1+variance_x/P^2)-N*log2(1+NoiseVariance/P^2)-2*i;
+    end
+    plot(value(2:end))
+
+    print -dpng "cost_vs_benefit.png" 
+
+    # Now we choose the best max value
+    [val, degree] = max(value)
+
+# e) Now preprocess the initial signal by removing its mean. Fit an order 3 model. Increase the model order and observe the marginal gain. Now compare the model obtained now with the model obtained without preprocessing. Compare the zero-pole diagrams. Increase the order of the model from 2 to 20 i Choose the order of the model using the technique describe previously 
+
