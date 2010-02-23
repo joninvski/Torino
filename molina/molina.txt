@@ -1,0 +1,26 @@
+
+Outlier Detection Using k-Nearest Neighbour Graph; Hautamaki, Ville; Karkkainen, Ismo; Franti, Pasi
+
+* Summary *
+
+This article presents ODIN, an algorithm that utilizes k-nearest neighbour graphs to detect ouliers on datasets. It performs tests on five different datasets, with different domains, and presents the results with the error rates of outliers detections.
+
+* Description *
+The Odin algorithm is very simple to describe. It has two configuration parameters:
+ * T - Indicates the threshold of indregree for a vector. If it is less than this value, the vertex is maked is consideres an outlier.
+ * k - Indicates the number of outgoing edges to the k nearest vectors using a predefined distance measure.
+Odin simple constructs a kNN graph and then for each vertex, if it has a lower value  of connections than the value indicated by T, that vertex is considered as an outlier.
+
+To calculate T the article proposes two extensions to the RSS method. One does the RSS ordering by maximum value of the vectors of an edge, and the other uses the mean of all vectors present in an edge.
+
+The error rate used in the tests, named Half Total Error Rate (HTER), is given by addind the False Rejection and the False acceptance rates and then dividing the result by 2.
+
+* Strong Points *
+The algorithm is extremelly simple to understand and to implement. Tests are performed on 5 different types of data sets, including a network intrusion dataset.
+
+* Weak Points *
+The main problem in the article, looking from the network anomaly dectection field, is that ODIN does not have the best possible results (altough they are all closer). Simple performing KDist algorithm and then considering the T biggest edges has a slighter better result in detecting outliers than ODIN. 
+
+The article does indicates that if T is low, than the parameters K has a low impact on the error rate. The problem is that when T is not a extremely low value, then a good k is a must for low error rates.
+
+In calculating T, the algorithm still needs to be feed with a t value. The article does not indicate any good indication of how to choose this value.
