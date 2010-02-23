@@ -7,7 +7,7 @@
 # a) Observe the second column of the variable Y. 
 
     # Load the data
-    all_data = load Y.dat;
+    all_data = load "Y.dat";
 
     figure(1, "visible", "off");
     data = all_data(:,2);
@@ -106,15 +106,25 @@
     [ar_coeffs, NoiseVariance] = aryule(data_mean, 30);
     zplane(1, ar_coeffs)
     print -dpng "fit_degree_30.png" 
+    freqz(1, ar_coeffs)
+    print -dpng "freq_degree_30.png" 
 
     [ar_coeffs, NoiseVariance] = aryule(data_mean, 50);
     zplane(1, ar_coeffs)
     print -dpng "fit_degree_50.png" 
+    freqz(1, ar_coeffs)
+    print -dpng "freq_degree_50.png" 
 
     [ar_coeffs, NoiseVariance] = aryule(data_mean, 90);
     zplane(1, ar_coeffs)
     print -dpng "fit_degree_90.png" 
+    freqz(1, ar_coeffs)
+    print -dpng "freq_degree_90.png" 
 
     [ar_coeffs, NoiseVariance] = aryule(data_mean, 120);
     zplane(1, ar_coeffs)
     print -dpng "fit_degree_120.png" 
+    freqz(1, ar_coeffs)
+    print -dpng "freq_degree_120.png" 
+
+    #In here I think it has something todo with the stop band, but I need some help of you guys
