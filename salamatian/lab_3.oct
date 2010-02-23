@@ -62,8 +62,8 @@
     #N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
 
     #Let's start by filling the parameters 
-    [N, M] = size(data) #N is the number of observations;
-    variance_x = var(data) #The variance of the real data;
+    [N, M] = size(data); #N is the number of observations;
+    variance_x = var(data); #The variance of the real data;
     P = 1;
 
     for i=1:10
@@ -75,7 +75,46 @@
     print -dpng "cost_vs_benefit.png" 
 
     # Now we choose the best max value
-    [val, degree] = max(value)
+    [val, degree] = max(value);
+
+    # Print the optimal degree (This may not work on matlab)
+    printf("The model order which maximizes the value is: %d\n", degree)
 
 # e) Now preprocess the initial signal by removing its mean. Fit an order 3 model. Increase the model order and observe the marginal gain. Now compare the model obtained now with the model obtained without preprocessing. Compare the zero-pole diagrams. Increase the order of the model from 2 to 20 i Choose the order of the model using the technique describe previously 
 
+    data_mean = data - mean(data);
+
+    variance_x_mean= var(data_mean); #The variance of the real data
+
+    for i=1:20
+        [ar_coeffs, NoiseVariance] = aryule(data_mean, i);
+        value_mean(i) = N*log2(1+variance_x_mean/P^2)-N*log2(1+NoiseVariance/P^2)-2*i;
+    end
+    plot(value_mean(2:end))
+
+    print -dpng "cost_vs_benefit_mean.png" 
+
+    # Now we choose the best max value
+    [val_mean, degree_mean] = max(value_mean);
+
+    # Print the optimal degree (This may not work on matlab)
+    printf("The model order when data is extracted the mean: %d\n", degree_mean)
+
+    #f) The data is clearly periodic, so we can expect to observe the period in the model ? At which point in the spectra you expect to see the periodicity ? where do you expect to see some poles ? Is this model satisfactory ? Increase the order of the model up to 30, 50. Are you beginning to see the periodicity? Increase the order to 90, 120. What happens ? What have you learned ?
+
+    # Degree 1
+    [ar_coeffs, NoiseVariance] = aryule(data_mean, 30);
+    zplane(1, ar_coeffs)
+    print -dpng "fit_degree_30.png" 
+
+    [ar_coeffs, NoiseVariance] = aryule(data_mean, 50);
+    zplane(1, ar_coeffs)
+    print -dpng "fit_degree_50.png" 
+
+    [ar_coeffs, NoiseVariance] = aryule(data_mean, 90);
+    zplane(1, ar_coeffs)
+    print -dpng "fit_degree_90.png" 
+
+    [ar_coeffs, NoiseVariance] = aryule(data_mean, 120);
+    zplane(1, ar_coeffs)
+    print -dpng "fit_degree_120.png" 
