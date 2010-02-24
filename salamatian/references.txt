@@ -1,3 +1,4 @@
 http://docs.google.com/viewer?url=http://web.mit.edu/2.14/www/Handouts/PoleZero.pdf
 http://en.wikipedia.org/wiki/Z-transform
 http://en.wikipedia.org/wiki/Pole–zero_plot
+http://www.mathworks.com/support/tech-notes/1700/1702.html
