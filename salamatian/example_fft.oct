@@ -1,0 +1,15 @@
+fs = 50;                            % Sample frequency (Hz)
+t = 0:1/fs:10-1/fs;                 % 10 sec sample
+x = sin(2*pi*15*t);                 % 15 Hz component
+plot(x)
+
+m = length(x);          % Window length
+n = pow2(nextpow2(m));  % Transform length
+y = fft(x,9);           % DFT
+f = (0:n-1)*(fs/n);     % Frequency range
+power = y.*conj(y)/n;   % Power of the DFT
+
+plot(abs(y))
+    xlabel('Frequency (Hz)')
+    ylabel('Power')
+    title('{\bf Periodogram}')
