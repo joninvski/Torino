@@ -1,211 +1,211 @@
-% zbqry pnyvoengvba naq svggvat
+% model calibration and fitting
 
-%pyrne nyy;
-%pyp;
-pybfr nyy;
+%clear all;
+%clc;
+close all;
 
-ybnq L.qng;
+load Y.dat;
 
-[z,a] = fvmr(L);
-fvtany = L(:,2);
+[m,n] = size(Y);
+signal = Y(:,2);
 
-k_nkvf = yvafcnpr(0,z,z);
+x_axis = linspace(0,m,m);
 
-svther(1);
-cybg(k_nkvf,fvtany,'e');
-tevq ba;
-kynory('gvzr fgrc');
-lynory('fvtany');
-yrtraq('rzcvevpny fvtany if. gvzr')
+figure(1);
+plot(x_axis,signal,'r');
+grid on;
+xlabel('time step');
+ylabel('signal');
+legend('empirical signal vs. time')
 
-% beqre_3 = 3;
-% [svggrq_zbqry_3,cerqvpgvba_reebe_3] = nelhyr(fvtany,beqre_3);
-% svther(2);
-% serdm(1,svggrq_zbqry_3);
-% svther(3);
-% mcynar(1,svggrq_zbqry_3);
+% order_3 = 3;
+% [fitted_model_3,prediction_error_3] = aryule(signal,order_3);
+% figure(2);
+% freqz(1,fitted_model_3);
+% figure(3);
+% zplane(1,fitted_model_3);
 % 
-% beqre_4 = 4;
-% [svggrq_zbqry_4,cerqvpgvba_reebe_4] = nelhyr(fvtany,beqre_4);
-% svther(4);
-% serdm(1,svggrq_zbqry_4);
-% svther(5);
-% mcynar(1,svggrq_zbqry_4);
+% order_4 = 4;
+% [fitted_model_4,prediction_error_4] = aryule(signal,order_4);
+% figure(4);
+% freqz(1,fitted_model_4);
+% figure(5);
+% zplane(1,fitted_model_4);
 % 
-% beqre_5 = 5;
-% [svggrq_zbqry_5,cerqvpgvba_reebe_5] = nelhyr(fvtany,beqre_5);
-% svther(6);
-% serdm(1,svggrq_zbqry_5);
-% svther(7);
-% mcynar(1,svggrq_zbqry_5);
+% order_5 = 5;
+% [fitted_model_5,prediction_error_5] = aryule(signal,order_5);
+% figure(6);
+% freqz(1,fitted_model_5);
+% figure(7);
+% zplane(1,fitted_model_5);
 % 
-% beqre_6 = 6;
-% [svggrq_zbqry_6,cerqvpgvba_reebe_6] = nelhyr(fvtany,beqre_6);
-% svther(8);
-% serdm(1,svggrq_zbqry_6);
-% svther(9);
-% mcynar(1,svggrq_zbqry_6);
+% order_6 = 6;
+% [fitted_model_6,prediction_error_6] = aryule(signal,order_6);
+% figure(8);
+% freqz(1,fitted_model_6);
+% figure(9);
+% zplane(1,fitted_model_6);
 % 
-% beqre_7 = 7;
-% [svggrq_zbqry_7,cerqvpgvba_reebe_7] = nelhyr(fvtany,beqre_7);
-% svther(10);
-% serdm(1,svggrq_zbqry_7);
-% svther(11);
-% mcynar(1,svggrq_zbqry_7);
+% order_7 = 7;
+% [fitted_model_7,prediction_error_7] = aryule(signal,order_7);
+% figure(10);
+% freqz(1,fitted_model_7);
+% figure(11);
+% zplane(1,fitted_model_7);
 % 
-% beqre_8 = 8;
-% [svggrq_zbqry_8,cerqvpgvba_reebe_8] = nelhyr(fvtany,beqre_8);
-% svther(12);
-% serdm(1,svggrq_zbqry_8);
-% svther(13);
-% mcynar(1,svggrq_zbqry_8);
+% order_8 = 8;
+% [fitted_model_8,prediction_error_8] = aryule(signal,order_8);
+% figure(12);
+% freqz(1,fitted_model_8);
+% figure(13);
+% zplane(1,fitted_model_8);
 % 
-% beqre_9 = 9;
-% [svggrq_zbqry_9,cerqvpgvba_reebe_9] = nelhyr(fvtany,beqre_9);
-% svther(14);
-% serdm(1,svggrq_zbqry_9);
-% svther(15);
-% mcynar(1,svggrq_zbqry_9);
+% order_9 = 9;
+% [fitted_model_9,prediction_error_9] = aryule(signal,order_9);
+% figure(14);
+% freqz(1,fitted_model_9);
+% figure(15);
+% zplane(1,fitted_model_9);
 % 
-% beqre_10 = 10;
-% [svggrq_zbqry_10,cerqvpgvba_reebe_10] = nelhyr(fvtany,beqre_10);
-% svther(16);
-% serdm(1,svggrq_zbqry_10);
-% svther(17);
-% mcynar(1,svggrq_zbqry_10);
+% order_10 = 10;
+% [fitted_model_10,prediction_error_10] = aryule(signal,order_10);
+% figure(16);
+% freqz(1,fitted_model_10);
+% figure(17);
+% zplane(1,fitted_model_10);
 % 
-% beqre = [beqre_3 beqre_6 beqre_10];
-% cerqvpgvba_reebe = [cerqvpgvba_reebe_3 cerqvpgvba_reebe_6 cerqvpgvba_reebe_10];
-% svther(18);
-% cybg(beqre,cerqvpgvba_reebe,'e');
-% tevq ba;
-% kynory('beqre bs NE zbqry');
-% lynory('cerqvpgvba reebe');
-% yrtraq('cerqvpgvba reebe if. beqre')
+% order = [order_3 order_6 order_10];
+% prediction_error = [prediction_error_3 prediction_error_6 prediction_error_10];
+% figure(18);
+% plot(order,prediction_error,'r');
+% grid on;
+% xlabel('order of AR model');
+% ylabel('prediction error');
+% legend('prediction error vs. order')
 
 % 4.
 
-fvtany_inevnapr = ine(fvtany);
-C = 1;
+signal_variance = var(signal);
+P = 1;
 
-sbe beqre = 1:10
-[svggrq_zbqry,cerqvpgvba_reebe] = nelhyr(fvtany,beqre);
-orarsvg(beqre) = z*ybt2(1+fvtany_inevnapr/C^2)-z*ybt2(1+cerqvpgvba_reebe/C^2)-5*beqre;
-beqre_irpgbe(beqre) = beqre;
-raq
+for order = 1:10
+[fitted_model,prediction_error] = aryule(signal,order);
+benefit(order) = m*log2(1+signal_variance/P^2)-m*log2(1+prediction_error/P^2)-5*order;
+order_vector(order) = order;
+end
 
-svther(19);
-cybg(beqre_irpgbe,orarsvg,'e');
-tevq ba;
+figure(19);
+plot(order_vector,benefit,'r');
+grid on;
 
-[znk_orarsvg,bcgvzny_beqre] = znk(orarsvg);
+[max_benefit,optimal_order] = max(benefit);
 
 % 5.
 
-fvtany_zrna = fvtany - zrna(fvtany); % ercrng cebprqher sbe fvtany_zrna - beqre: 2 gb 20.
+signal_mean = signal - mean(signal); % repeat procedure for signal_mean - order: 2 to 20.
 
 % 7.
 
-G = 144;
+T = 144;
 
-% cercebprffvat
-    sbe v=1:z
-vs (v<=G)
-    fvtany_G(v) = fvtany(v);
-    ryfr
-    fvtany_G(v) = fvtany(v) - fvtany(v-G);
-    raq
-    raq
+% preprocessing
+    for i=1:m
+if (i<=T)
+    signal_T(i) = signal(i);
+    else
+    signal_T(i) = signal(i) - signal(i-T);
+    end
+    end
 
     % 8.
 
-    fvtany_unys = fvtany(1:504);
+    signal_half = signal(1:504);
 
-    G = 144;
+    T = 144;
 
-    % cercebprffvat
-    sbe v=1:(z/2)
-vs (v<=G)
-    fvtany_unys_G(v) = fvtany_unys(v);
-    ryfr
-    fvtany__unys_G(v) = fvtany_unys(v) - fvtany_unys(v-G);
-    raq
-    raq
+    % preprocessing
+    for i=1:(m/2)
+if (i<=T)
+    signal_half_T(i) = signal_half(i);
+    else
+    signal__half_T(i) = signal_half(i) - signal_half(i-T);
+    end
+    end
 
-    fvtany_unys_inevnapr = ine(fvtany_unys);
-    C = 1;
+    signal_half_variance = var(signal_half);
+    P = 1;
 
-    sbe beqre = 1:10
-    [svggrq_zbqry,cerqvpgvba_reebe] = nelhyr(fvtany_unys,beqre);
-    orarsvg(beqre) = (z/2)*ybt2(1+fvtany_unys_inevnapr/C^2)-(z/2)*ybt2(1+cerqvpgvba_reebe/C^2)-2*beqre;
-    beqre_irpgbe(beqre) = beqre;
-    grzc_cerqvpgvba_reebe(beqre) = cerqvpgvba_reebe;
-    raq
+    for order = 1:10
+    [fitted_model,prediction_error] = aryule(signal_half,order);
+    benefit(order) = (m/2)*log2(1+signal_half_variance/P^2)-(m/2)*log2(1+prediction_error/P^2)-2*order;
+    order_vector(order) = order;
+    temp_prediction_error(order) = prediction_error;
+    end
 
-    svther(20);
-    cybg(beqre_irpgbe(3:raq),orarsvg(3:raq),'e');
-    tevq ba;
+    figure(20);
+    plot(order_vector(3:end),benefit(3:end),'r');
+    grid on;
 
-    [znk_orarsvg,bcgvzny_beqre] = znk(orarsvg);
-    cerqvpgvba_reebe_bcgvzny = grzc_cerqvpgvba_reebe(bcgvzny_beqre);
+    [max_benefit,optimal_order] = max(benefit);
+    prediction_error_optimal = temp_prediction_error(optimal_order);
 
-    [svggrq_zbqry,grzc_cerqvpgvba_reebe] = nelhyr(fvtany_unys,bcgvzny_beqre);
+    [fitted_model,temp_prediction_error] = aryule(signal_half,optimal_order);
 
 
-    %********************** Xnyzna Svygrevat **********************
+    %********************** Kalman Filtering **********************
 
-% T(m)
+% G(z)
 
-    % znk_beqre = 144;
-    % T_ahzrengbe = [1 mrebf(1,znk_beqre)];
-    % T_qrabzvangbe = [1 mrebf(1,znk_beqre-1) -1];
+    % max_order = 144;
+    % G_numerator = [1 zeros(1,max_order)];
+    % G_denominator = [1 zeros(1,max_order-1) -1];
     % 
-    % N_m = svggrq_zbqry;
+    % A_z = fitted_model;
     % 
-    % grzc_T = gs(T_ahzrengbe,T_qrabzvangbe);
-    % N = gs(N_m,1);
+    % temp_G = tf(G_numerator,G_denominator);
+    % A = tf(A_z,1);
     % 
-    % T = grzc_T*N;
+    % G = temp_G*A;
     % 
-    % T_ahz = pbai(T_ahzrengbe,N_m);
-    % T_qra = T_qrabzvangbe;
+    % G_num = conv(G_numerator,A_z);
+    % G_den = G_denominator;
     % 
-    % %T_grzc = gs(T_ahz,T_qra);
+    % %G_temp = tf(G_num,G_den);
     % 
-    % [NN,OO,PP,QQ] = gs2ff(T_ahz,T_qra);
+    % [AA,BB,CC,DD] = tf2ss(G_num,G_den);
 
-    znk_beqre = G+bcgvzny_beqre;
+    max_order = T+optimal_order;
 
-    T_ahz_grzc = [1 mrebf(1,G)];
-    T_qra_grzc = [1 mrebf(1,G-1) -1];
+    G_num_temp = [1 zeros(1,T)];
+    G_den_temp = [1 zeros(1,T-1) -1];
 
-    N_m = svggrq_zbqry;
+    A_z = fitted_model;
 
-    T_ahz = T_ahz_grzc;
-    T_qra = pbai(T_qra_grzc,N_m);
+    G_num = G_num_temp;
+    G_den = conv(G_den_temp,A_z);
 
-    T = gs(T_ahz,T_qra);
+    G = tf(G_num,G_den);
 
-    [NN,OO,PP,QQ] = gs2ff(T_ahz,T_qra);
+    [AA,BB,CC,DD] = tf2ss(G_num,G_den);
 
-    f.N = NN;
-    f.O = OO;
-    f.U = PP;
-    f.D = cerqvpgvba_reebe_bcgvzny;
-    f.E = cerqvpgvba_reebe_bcgvzny/5;
+    s.A = AA;
+    s.B = BB;
+    s.H = CC;
+    s.Q = prediction_error_optimal;
+    s.R = prediction_error_optimal/5;
 
-    f.k = L((504-146):504,2); % qhywvan bibt irxgben bivfv b bcgvznyabz erqh
-    f.C = cerqvpgvba_reebe_bcgvzny;
+    s.x = Y((504-146):504,2); % duljina ovog vektora ovisi o optimalnom redu
+    s.P = prediction_error_optimal;
 
-    sbe v = 504:1008
+    for i = 504:1008
 
-    f.m = L(v,2);
+    s.z = Y(i,2);
 
-    f = xnyznas(f);
+    s = kalmanf(s);
 
-    vaabi(v) = f.v;
+    innov(i) = s.i;
 
-    Cv(v) = f.Cv;
+    Pi(i) = s.Pi;
 
-    raq
+    end
 
