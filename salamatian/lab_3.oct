@@ -118,3 +118,16 @@
     [ar_coeffs, NoiseVariance] = aryule(data_mean, 120);
     zplane(1, ar_coeffs)
     print -dpng "fit_degree_120.png" 
+
+
+    #g) 
+    T = 144
+    for i=1:m
+    if (i<=T)
+        data_T(i) = signal(i);
+    else
+        data_T(i) = data_T(i) - data_T(i-T);
+    end
+    end
+
+
