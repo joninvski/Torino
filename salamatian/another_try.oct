@@ -1,0 +1,211 @@
+% zbqry pnyvoengvba naq svggvat
+
+%pyrne nyy;
+%pyp;
+pybfr nyy;
+
+ybnq L.qng;
+
+[z,a] = fvmr(L);
+fvtany = L(:,2);
+
+k_nkvf = yvafcnpr(0,z,z);
+
+svther(1);
+cybg(k_nkvf,fvtany,'e');
+tevq ba;
+kynory('gvzr fgrc');
+lynory('fvtany');
+yrtraq('rzcvevpny fvtany if. gvzr')
+
+% beqre_3 = 3;
+% [svggrq_zbqry_3,cerqvpgvba_reebe_3] = nelhyr(fvtany,beqre_3);
+% svther(2);
+% serdm(1,svggrq_zbqry_3);
+% svther(3);
+% mcynar(1,svggrq_zbqry_3);
+% 
+% beqre_4 = 4;
+% [svggrq_zbqry_4,cerqvpgvba_reebe_4] = nelhyr(fvtany,beqre_4);
+% svther(4);
+% serdm(1,svggrq_zbqry_4);
+% svther(5);
+% mcynar(1,svggrq_zbqry_4);
+% 
+% beqre_5 = 5;
+% [svggrq_zbqry_5,cerqvpgvba_reebe_5] = nelhyr(fvtany,beqre_5);
+% svther(6);
+% serdm(1,svggrq_zbqry_5);
+% svther(7);
+% mcynar(1,svggrq_zbqry_5);
+% 
+% beqre_6 = 6;
+% [svggrq_zbqry_6,cerqvpgvba_reebe_6] = nelhyr(fvtany,beqre_6);
+% svther(8);
+% serdm(1,svggrq_zbqry_6);
+% svther(9);
+% mcynar(1,svggrq_zbqry_6);
+% 
+% beqre_7 = 7;
+% [svggrq_zbqry_7,cerqvpgvba_reebe_7] = nelhyr(fvtany,beqre_7);
+% svther(10);
+% serdm(1,svggrq_zbqry_7);
+% svther(11);
+% mcynar(1,svggrq_zbqry_7);
+% 
+% beqre_8 = 8;
+% [svggrq_zbqry_8,cerqvpgvba_reebe_8] = nelhyr(fvtany,beqre_8);
+% svther(12);
+% serdm(1,svggrq_zbqry_8);
+% svther(13);
+% mcynar(1,svggrq_zbqry_8);
+% 
+% beqre_9 = 9;
+% [svggrq_zbqry_9,cerqvpgvba_reebe_9] = nelhyr(fvtany,beqre_9);
+% svther(14);
+% serdm(1,svggrq_zbqry_9);
+% svther(15);
+% mcynar(1,svggrq_zbqry_9);
+% 
+% beqre_10 = 10;
+% [svggrq_zbqry_10,cerqvpgvba_reebe_10] = nelhyr(fvtany,beqre_10);
+% svther(16);
+% serdm(1,svggrq_zbqry_10);
+% svther(17);
+% mcynar(1,svggrq_zbqry_10);
+% 
+% beqre = [beqre_3 beqre_6 beqre_10];
+% cerqvpgvba_reebe = [cerqvpgvba_reebe_3 cerqvpgvba_reebe_6 cerqvpgvba_reebe_10];
+% svther(18);
+% cybg(beqre,cerqvpgvba_reebe,'e');
+% tevq ba;
+% kynory('beqre bs NE zbqry');
+% lynory('cerqvpgvba reebe');
+% yrtraq('cerqvpgvba reebe if. beqre')
+
+% 4.
+
+fvtany_inevnapr = ine(fvtany);
+C = 1;
+
+sbe beqre = 1:10
+[svggrq_zbqry,cerqvpgvba_reebe] = nelhyr(fvtany,beqre);
+orarsvg(beqre) = z*ybt2(1+fvtany_inevnapr/C^2)-z*ybt2(1+cerqvpgvba_reebe/C^2)-5*beqre;
+beqre_irpgbe(beqre) = beqre;
+raq
+
+svther(19);
+cybg(beqre_irpgbe,orarsvg,'e');
+tevq ba;
+
+[znk_orarsvg,bcgvzny_beqre] = znk(orarsvg);
+
+% 5.
+
+fvtany_zrna = fvtany - zrna(fvtany); % ercrng cebprqher sbe fvtany_zrna - beqre: 2 gb 20.
+
+% 7.
+
+G = 144;
+
+% cercebprffvat
+    sbe v=1:z
+vs (v<=G)
+    fvtany_G(v) = fvtany(v);
+    ryfr
+    fvtany_G(v) = fvtany(v) - fvtany(v-G);
+    raq
+    raq
+
+    % 8.
+
+    fvtany_unys = fvtany(1:504);
+
+    G = 144;
+
+    % cercebprffvat
+    sbe v=1:(z/2)
+vs (v<=G)
+    fvtany_unys_G(v) = fvtany_unys(v);
+    ryfr
+    fvtany__unys_G(v) = fvtany_unys(v) - fvtany_unys(v-G);
+    raq
+    raq
+
+    fvtany_unys_inevnapr = ine(fvtany_unys);
+    C = 1;
+
+    sbe beqre = 1:10
+    [svggrq_zbqry,cerqvpgvba_reebe] = nelhyr(fvtany_unys,beqre);
+    orarsvg(beqre) = (z/2)*ybt2(1+fvtany_unys_inevnapr/C^2)-(z/2)*ybt2(1+cerqvpgvba_reebe/C^2)-2*beqre;
+    beqre_irpgbe(beqre) = beqre;
+    grzc_cerqvpgvba_reebe(beqre) = cerqvpgvba_reebe;
+    raq
+
+    svther(20);
+    cybg(beqre_irpgbe(3:raq),orarsvg(3:raq),'e');
+    tevq ba;
+
+    [znk_orarsvg,bcgvzny_beqre] = znk(orarsvg);
+    cerqvpgvba_reebe_bcgvzny = grzc_cerqvpgvba_reebe(bcgvzny_beqre);
+
+    [svggrq_zbqry,grzc_cerqvpgvba_reebe] = nelhyr(fvtany_unys,bcgvzny_beqre);
+
+
+    %********************** Xnyzna Svygrevat **********************
+
+% T(m)
+
+    % znk_beqre = 144;
+    % T_ahzrengbe = [1 mrebf(1,znk_beqre)];
+    % T_qrabzvangbe = [1 mrebf(1,znk_beqre-1) -1];
+    % 
+    % N_m = svggrq_zbqry;
+    % 
+    % grzc_T = gs(T_ahzrengbe,T_qrabzvangbe);
+    % N = gs(N_m,1);
+    % 
+    % T = grzc_T*N;
+    % 
+    % T_ahz = pbai(T_ahzrengbe,N_m);
+    % T_qra = T_qrabzvangbe;
+    % 
+    % %T_grzc = gs(T_ahz,T_qra);
+    % 
+    % [NN,OO,PP,QQ] = gs2ff(T_ahz,T_qra);
+
+    znk_beqre = G+bcgvzny_beqre;
+
+    T_ahz_grzc = [1 mrebf(1,G)];
+    T_qra_grzc = [1 mrebf(1,G-1) -1];
+
+    N_m = svggrq_zbqry;
+
+    T_ahz = T_ahz_grzc;
+    T_qra = pbai(T_qra_grzc,N_m);
+
+    T = gs(T_ahz,T_qra);
+
+    [NN,OO,PP,QQ] = gs2ff(T_ahz,T_qra);
+
+    f.N = NN;
+    f.O = OO;
+    f.U = PP;
+    f.D = cerqvpgvba_reebe_bcgvzny;
+    f.E = cerqvpgvba_reebe_bcgvzny/5;
+
+    f.k = L((504-146):504,2); % qhywvan bibt irxgben bivfv b bcgvznyabz erqh
+    f.C = cerqvpgvba_reebe_bcgvzny;
+
+    sbe v = 504:1008
+
+    f.m = L(v,2);
+
+    f = xnyznas(f);
+
+    vaabi(v) = f.v;
+
+    Cv(v) = f.Cv;
+
+    raq
+
