@@ -240,4 +240,23 @@
     # Print the optimal degree (This may not work on matlab)
     printf("The model order when the first halt of the mean data is extracted %d\n", degree_half)
 
-#i) Are you hoping you had 1 month of data ? why ? just for the sake of having more data to play with or .... 
+###################################################
+#i) Are you hoping you had 1 month of data ? why ? 
+# just for the sake of having more data to play with or .... 
+###################################################
+
+    figure(fig++, "visible", "on");
+    grid
+    semilogy(value_half(2:end),'r')
+    hold on
+    semilogy(value_mean(2:end),'b')
+    hold off
+    legend('Half Data', 'All Data')
+    ylabel('Benefit')
+    xlabel('Order')
+
+    # Answer what would be better if we had a month of data
+    printf("As it is possible to see in the plot, with the entire data")
+    printf("and with a lower order using more data we can achieve a higher benefit")
+    printf("We can then assume that if we add a all month of data")
+    printf("with lower order our benefit will be higher\n")
