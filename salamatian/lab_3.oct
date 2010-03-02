@@ -1,11 +1,13 @@
-#####################3
+# *************************************************
 #
-#  Lab 3
+#                   Lab 3
 #
-#######################
-fig= 1
+# *************************************************
 
-# a) Observe the second column of the variable Y. 
+###################################################
+# a) Observe the second column of the variable Y.
+###################################################
+    fig= 1
 
     # Load the data
     all_data = load "Y.dat";
@@ -16,18 +18,27 @@ fig= 1
     plot(data);
     print -dpng "traffic_by_time.png" 
 
-# b) Can you assume the signal is random ? stationary ? if no why ? if yes why ? (take care the two answer can be correct, depending on the framework).
-#as a first try we will like to directly fit an AR model to these data. For this purpose we can use the matlab function aryule(see help aryule).
+###################################################
+# b) Can you assume the signal is random ? stationary ? if no why ? if
+# yes why ? (take care the two answer can be correct, depending on the
+# framework).
+#as a first try we will like to directly fit an AR model to these data.
+#For this purpose we can use the matlab function aryule(see help aryule).
+###################################################
+    # Answer:
+    # Yes. We can say the signal is stationary because the values do not
+    # change over time or position. They keep repeting themselfs in cycles,
+    # but always repeating the same values (broadly).
 
-# Yes. We can say the signal is stationary because the values do not change over time or position. They keep repeting themselfs in cycles, but always repeating the same values (broadly).
-
-##################
-#
-# Directly fit AR model
-#
-#################
-
-#c) Calibrate an order 3 AR model using the forward backward method w. Observe the frequency response of the fitted model (using the command freqz) and the pole-zero plot (using the command zplane). Continue the calibration with larger order (up to 10). Make a plot of the model error as a function of the order. How behave the marginal gain of increasing the order of the model. Compare the zero-pole diagrams when the order of the model increases.
+###################################################
+#c) Calibrate an order 3 AR model using the forward backward method w.
+# Observe the frequency response of the fitted model (using the command
+# freqz) and the pole-zero plot (using the command zplane). Continue the
+# calibration with larger order (up to 10). Make a plot of the model
+# error as a function of the order. How behave the marginal gain of
+# increasing the order of the model. Compare the zero-pole diagrams when 
+# the order of the model increases.
+###################################################
 
     for i=1:10
         [ar_coeffs, NoiseVariance(i+1)] = aryule(data, i+1);
@@ -56,17 +67,32 @@ fig= 1
     zplane(1, ar_coeffs)
     print -dpng "fit_degree_10.png" 
 
+###################################################
 # d) Choosing the order of the model
+# This is a question of cost vs. benefit tradeoff. We are going to present
+# the Rissanen MDL (Minimum Description Length) approach. Let’s assume
+# that one want to transmit N sample of data with a precision of P. He can
+# do this by sending the raw data (X), and consumate around
+# N*log(1+variance(X)/P^2) bits of data. He can also construct a model.
+# Now we have to send the model parameters (let’s assume k parameter each
+# represented with m bytes) along with the prediction error (E) resulting
+# from the model.
+#
+# This will need in whole m*k+N*log(1+variance(E)/P^2) bits. So the benefit
+# of the model in term of bits of information is equal to :
+# N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
+#
+# By plotting the curve of benefit as a function of k, one can observe a curve
+# that increase for low value of k but peaks at some point and decrease
+# thereafter. The peak gives the more benefitial model order.
+# Now implement the above approach. Choose a meaningful value of m and find the
+# order of the model that maximize the benefit.
+#
+# N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
+###################################################
 
-# This is a question of cost vs. benefit tradeoff. We are going to present the Rissanen MDL (Minimum Description Length) approach. Let’s assume that one want to transmit N sample of data with a precision of P. He can do this by sending the raw data (X), and consumate around N*log(1+variance(X)/P^2) bits of data. He can also construct a model. Now we have to send the model parameters (let’s assume k parameter each represented with m bytes) along with the prediction error (E) resulting from the model. This will need in whole m*k+N*log(1+variance(E)/P^2) bits. So the benefit of the model in term of bits of information is equal to :
-#N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
 
-#By plotting the curve of benefit as a function of k, one can observe a curve that increase for low value of k but peaks at some point and decrease thereafter. The peak gives the more benefitial model order. 
-# Now implement the above approach. Choose a meaningful value of m and find the order of the model that maximize the benefit.
-
-    #N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
-
-    #Let's start by filling the parameters 
+    #Let's start by filling the parameters
     [N, M] = size(data); #N is the number of observations;
     variance_x = var(data); #The variance of the real data;
     P = 1;
@@ -77,7 +103,7 @@ fig= 1
     end
     figure(fig++, "visible", "off")
     plot(value(2:end))
-    print -dpng "cost_vs_benefit.png" 
+    print -dpng "cost_vs_benefit.png"
 
     # Now we choose the best max value
     [val, degree] = max(value);
@@ -85,7 +111,13 @@ fig= 1
     # Print the optimal degree (This may not work on matlab)
     printf("The model order which maximizes the value is: %d\n", degree)
 
-# e) Now preprocess the initial signal by removing its mean. Fit an order 3 model. Increase the model order and observe the marginal gain. Now compare the model obtained now with the model obtained without preprocessing. Compare the zero-pole diagrams. Increase the order of the model from 2 to 20 i Choose the order of the model using the technique describe previously 
+###################################################
+# e) Now preprocess the initial signal by removing its mean. Fit an order
+# 3 model. Increase the model order and observe the marginal gain. Now
+# compare the model obtained now with the model obtained without preprocessing.
+# Compare the zero-pole diagrams. Increase the order of the model from 2 to 20 i
+# Choose the order of the model using the technique describe previously
+###################################################
 
     data_mean = data - mean(data);
 
@@ -106,7 +138,14 @@ fig= 1
     # Print the optimal degree (This may not work on matlab)
     printf("The model order when data is extracted the mean: %d\n", degree_mean)
 
-#f) The data is clearly periodic, so we can expect to observe the period in the model ? At which point in the spectra you expect to see the periodicity ? where do you expect to see some poles ? Is this model satisfactory ? Increase the order of the model up to 30, 50. Are you beginning to see the periodicity? Increase the order to 90, 120. What happens ? What have you learned ?
+###################################################
+#f) The data is clearly periodic, so we can expect to observe the period
+# in the model ? At which point in the spectra you expect to see the
+# periodicity ? where do you expect to see some poles ? Is this model
+# satisfactory ? Increase the order of the model up to 30, 50.
+# Are you beginning to see the periodicity?
+# Increase the order to 90, 120. What happens ? What have you learned ?
+###################################################
 
     # Degree 1
     [ar_coeffs, NoiseVariance] = aryule(data_mean, 30);
@@ -139,7 +178,18 @@ fig= 1
 
     #In here I think it has something todo with the stop band, but I need some help of you guys
 
-#g) The data being clearly periodic one can assume this from the beginning and model the data after removing the periodic trend. One can remove the periodicity by preprocessing the rescaled data by passing it through a filter with input-output relation : y(n)=x(n)-x(n-T). What is the transfer function of such a pre-processing ? Apply this pre-processing to your data and calibrate an AR model to the result. What will be the final pole-zero map and the final spectra ? Can you see clearly the periodic part ?
+###################################################
+#g) The data being clearly periodic one can assume this from the
+# beginning and model the data after removing the periodic trend.
+# One can remove the periodicity by preprocessing the rescaled data
+# by passing it through a filter with input-output relation:
+# y(n)=x(n)-x(n-T).
+#
+# What is the transfer function of such a pre-processing?
+# Apply this pre-processing to your data and calibrate an AR model to
+# the result. What will be the final pole-zero map and the final spectra?
+# Can you see clearly the periodic part ?
+###################################################
 
     #    hint 1 : for part g, the preprocessing transfer function will be 
     #       P(z)=1/(1-z^(-T)). Why ? plot its transfer function and its pole zero. What do you see ?
@@ -159,7 +209,12 @@ fig= 1
 
     print -dpng "aperiodic_data.png" 
 
-# h) No let's calibrate the final model. We will use only half of the data for calibrating the model to use the remaining to validate it. So redo step g with half of the data, i.e. Y (1:504,2) and put aside the resulting model and its error for a later usage.
+###################################################
+# h) No let's calibrate the final model. We will use only half of the data
+# for calibrating the model to use the remaining to validate it. So redo
+# step g with half of the data, i.e. Y (1:504,2) and put aside the
+# resulting model and its error for a later usage.
+###################################################
 
     #First let's preprocess only half the data
     calibration_data = data_mean(1:504);
