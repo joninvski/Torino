@@ -1,0 +1,108 @@
+# *************************************************
+#
+#                   Lab 5
+#  Kalman Filtering  and anomaly detection
+#
+# *************************************************
+
+###################################################
+# a) The model calibrated in Lab 3.h consists of two part : one part take
+# into account the 24 hours periodicity defined as P(z)=1/(1-z^-(144)) and
+# one part resulting from calibrating the residuals by aryule as H(z)=1/A(z).
+# The overall model of normal behaviour becomes therefore:
+#    G(z)= 1/((1-z^(-144))*A(z).
+# Please derive G(z).
+###################################################
+    T = 144; # We will admit that the period is 144 
+
+    # B (the numerator of the transfer function) is [1 0 0 0 .... 0 0 0]  
+    B = [1 zeros(1,T)];  # transfer function numerator
+    # A (the denominator of the transfer function) is [1 0 0 0 .... 0 0 1]  
+    A = zeros(T)(1:T+1);
+    A(1) = 1;
+    A(T+1) = 1;
+
+    A_z = best_model;
+
+    G_B = B;
+    G_A = conv(A, best_model);
+
+    G = tf(B, A);
+
+###################################################
+# b)A very useful function in matlab is the function tf2ss. Look at its help
+# and transform the above derived model G(z) into state space with the command
+# [AA,BB,CC,DD]=tf2ss(1,g) where g is the polynomial coming from G(z).
+###################################################
+
+
+###################################################
+# c)A Kalman filter needs a state space model in the form of 
+#   %x = Ax + Bu + w                  
+#   % z = Hx + v       
+#    where w ~ N(0,Q) is the modelling error and is gaussian    
+#   noise with covariance Q and v ~ N(0,R) is the measurement
+#   noise.
+#   The parameters of the model are easily derivable from the 
+#   above state-space model. A=AA, B=BB, H=CC. The         
+#   covariance of measurement noise is the error variance 
+#   given as the output of  the aryule calibration in Lab 3.g
+#   We will assume that the measurement noise is also a     
+#   gaussian  noise with covariance R=Q/5 (you can play with
+#   this noise and change it from 0 to Q and see the effects).
+#   So you can define :
+#   s.A=AA;
+#   s.B=BB;
+#   s.H=CC;
+#   s.Q=e; %coming from aryule in lab 3.g
+#   s.R=e/5;
+#   you have also to provide the initial value for the state vector       
+#   and the covariance matrix. letâs give
+#   s.x=Y((504-149):504,2);
+#   s.P=e;
+#   now we are ready for rocking the Kalman Filter :-)
+#   We can do this by 
+#   for i=504:1008 
+#       s.z=Y(i,2);
+#       s=kalmanf(s);
+#       innov(i)=s.i;
+#       Pi(i)=s.Pi;
+#   end
+#   Before going further a question. Why are you choosing 
+#   the initial value of s.x=Y((504-149):504,2)? why 149 ?  
+###################################################
+
+
+###################################################
+# d)Plot innov(i) ? make a qqplot of innov (command qqplot in matlab). Where do you
+# think anomalies are hidden in this qqplot ? check the mean of innovation. Compare
+# it with the mean of the initial data. Is it much smaller. Do you think that
+# assumption that the innovation process is a gaussian zero mean is reasonable ?
+###################################################
+
+###################################################
+# e)Now we are ready to do the last step in anomaly detection. The anomaly decision
+# step. The variance of the innovation is given by the kalman filter inside the value
+# s.Pi. The innovation is therefore assumed to be a gaussian random variable with mean
+# 0 and variance equal tp s.Pi. The Neyman-Pearson framework suggest to do anomaly
+# detection by comparing the value of the innovation with the threshold. Set the
+# threshold to +L*sqrt(s.Pi) and -L*sqrt(s.Pi) and detect anomalies!
+# See the effect of changing L (from 0.01 to 10) on the anomaly detected and describe it.
+###################################################
+
+###################################################
+# f)The issue is that you do not know which anomalies are real anomalies and which one
+# are false alarm. Letâs do the following trick: if an anomaly is detected at the
+# same time or very close in time in several link it should be a real anomaly.
+
+# For implementing this idea choose three other columns of Y and do exactly the same
+# steps that you did for colum Y(:,2) and run the Kalman filtering independently on each link.
+# Detect real anomalies when there is a consensus between at least three columns ? can you now
+# plot ROC curve for each  individual anomaly detector ? can you study the effect of increasing
+# the order of the model used for modelling normal behavior?
+###################################################
+
+###################################################
+# g)if you have reached this point. Congratulations !!!!! you are almost in the edge the nowadays
+# research on anomaly detection. I look forward reading your paper on the subject ! Good luck
+###################################################
