@@ -242,6 +242,9 @@
     # Print the optimal degree (This may not work on matlab)
     printf("The model order when the first halt of the mean data is extracted %d\n", degree_half)
 
+    # Now we choose the best model
+    [best_model, best_model_prediction_error] = aryule(half_aper_data,degree_half);
+
 ###################################################
 #i) Are you hoping you had 1 month of data ? why ?
 # just for the sake of having more data to play with or ....
