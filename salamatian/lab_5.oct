@@ -5,7 +5,7 @@
 #
 # *************************************************
 
-printf("Don't forget: This file depends on the prior execution of lab_3.oct\n")
+printf("Don't forget: This file (lab_5.oct) depends on the prior execution of lab_3.oct\n")
 
 ###################################################
 # a) The model calibrated in Lab 3.h consists of two part : one part take
@@ -59,7 +59,7 @@ printf("Don't forget: This file depends on the prior execution of lab_3.oct\n")
 #   s.Q=e; %coming from aryule in lab 3.g
 #   s.R=e/5;
 #   you have also to provide the initial value for the state vector       
-#   and the covariance matrix. letâs give
+#   and the covariance matrix. let's give
 #   s.x=Y((504-149):504,2);
 #   s.P=e;
 #   now we are ready for rocking the Kalman Filter :-)
@@ -77,17 +77,17 @@ printf("Don't forget: This file depends on the prior execution of lab_3.oct\n")
     s.B = BB;
     s.H = CC;
 
-    s.Q = best_model_prediction_error; %coming from aryule in lab 3.g
+    s.Q = best_model_prediction_error; #coming from aryule in lab 3.g
     s.R = s.Q/5;
 
     s.x=data((504-143):504); #Don't know why?
     s.P=s.Q;
 
     for i = 504:1008
-    s.z = data(i);
-    s = kalmanf(s);
-    innov(i) = s.i;
-    Pi(i) = s.Pi;
+        s.z = data(i);
+        s = kalmanf(s);
+        innov(i) = s.i;
+        Pi(i) = s.Pi;
     end
 
     # Question:
@@ -103,6 +103,25 @@ printf("Don't forget: This file depends on the prior execution of lab_3.oct\n")
 # it with the mean of the initial data. Is it much smaller. Do you think that
 # assumption that the innovation process is a gaussian zero mean is reasonable ?
 ###################################################
+    figure(fig++, "visible", "off");
+    plot(innov);
+    print -dpng "anomalies_1.png"
+
+
+    figure(fig++, "visible", "off");
+    qqplot(innov);
+    print -dpng "anomalies_off.png"
+
+    mean_innov = mean(innov)
+    mean_original_data = mean(data)
+
+    printf("Difference between innov mean and data mean is %d\n", mean(innov) - mean(data))
+
+    # Question:
+    #   Do you think that assumption that the innovation process is a gaussian
+    #   zero mean is reasonable ?
+    # Answer:
+    #   Honestly I don't know the answer
 
 ###################################################
 # e)Now we are ready to do the last step in anomaly detection. The anomaly decision
@@ -116,7 +135,7 @@ printf("Don't forget: This file depends on the prior execution of lab_3.oct\n")
 
 ###################################################
 # f)The issue is that you do not know which anomalies are real anomalies and which one
-# are false alarm. Letâs do the following trick: if an anomaly is detected at the
+# are false alarm. Let's o the following trick: if an anomaly is detected at the
 # same time or very close in time in several link it should be a real anomaly.
 
 # For implementing this idea choose three other columns of Y and do exactly the same
