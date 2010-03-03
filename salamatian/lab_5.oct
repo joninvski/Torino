@@ -5,6 +5,8 @@
 #
 # *************************************************
 
+printf("This file depends on the prior execution of lab_3.oct")
+
 ###################################################
 # a) The model calibrated in Lab 3.h consists of two part : one part take
 # into account the 24 hours periodicity defined as P(z)=1/(1-z^-(144)) and
