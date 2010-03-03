@@ -124,7 +124,7 @@ printf("Don't forget: This file (lab_5.oct) depends on the prior execution of la
     #   Honestly I don't know the answer
 
 ###################################################
-# e)Now we are ready to do the last step in anomaly detection. The anomaly decision
+# e) Now we are ready to do the last step in anomaly detection. The anomaly decision
 # step. The variance of the innovation is given by the kalman filter inside the value
 # s.Pi. The innovation is therefore assumed to be a gaussian random variable with mean
 # 0 and variance equal tp s.Pi. The Neyman-Pearson framework suggest to do anomaly
@@ -132,6 +132,28 @@ printf("Don't forget: This file (lab_5.oct) depends on the prior execution of la
 # threshold to +L*sqrt(s.Pi) and -L*sqrt(s.Pi) and detect anomalies!
 # See the effect of changing L (from 0.01 to 10) on the anomaly detected and describe it.
 ###################################################
+    innov_size = size(innov)(2);
+
+    L = 1
+    threshold_upper = L*sqrt(s.Pi);
+    threshold_lower = -1 * threshold_upper;
+    positive = []
+
+    # For each event in innov
+    for i = 1:innov_size
+        if (innov(i) > threshold_upper)
+            positive(end+1) = innov(i)
+        elseif (innov(i) < threshold_lower)
+            positive(end+1) = innov(i)
+        else
+            printf("nothing")
+        end
+    end
+
+    figure(fig++, "visible", "on");
+    plot(positive)
+    print -dpng "positives.png"
+
 
 ###################################################
 # f)The issue is that you do not know which anomalies are real anomalies and which one
