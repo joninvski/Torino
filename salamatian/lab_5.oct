@@ -73,7 +73,29 @@ printf("Don't forget: This file depends on the prior execution of lab_3.oct\n")
 #   Before going further a question. Why are you choosing 
 #   the initial value of s.x=Y((504-149):504,2)? why 149 ?  
 ###################################################
+s.A = AA;
+s.B = BB;
+s.H = CC;
 
+s.Q = best_model_prediction_error; %coming from aryule in lab 3.g
+s.R = s.Q/5;
+
+s.x=data((504-143):504); #Don't know why?
+s.P=s.Q;
+
+for i = 504:1008
+    s.z = data(i);
+    s = kalmanf(s);
+    innov(i) = s.i;
+    Pi(i) = s.Pi;
+end
+
+# Question:
+#   Before going further a question. Why are you choosing the
+#   initial value of s.x=Y((504-149):504,2)? why 149 ?
+# Answer:
+#   Honestly in our case we choose the value of 143 in order for the matrices
+#   be the correct size for '*' operation
 
 ###################################################
 # d)Plot innov(i) ? make a qqplot of innov (command qqplot in matlab). Where do you
