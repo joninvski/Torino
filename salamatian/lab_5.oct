@@ -5,7 +5,7 @@
 #
 # *************************************************
 
-printf("This file depends on the prior execution of lab_3.oct")
+printf("Don't forget: This file depends on the prior execution of lab_3.oct\n")
 
 ###################################################
 # a) The model calibrated in Lab 3.h consists of two part : one part take
@@ -36,7 +36,7 @@ printf("This file depends on the prior execution of lab_3.oct")
 # and transform the above derived model G(z) into state space with the command
 # [AA,BB,CC,DD]=tf2ss(1,g) where g is the polynomial coming from G(z).
 ###################################################
-
+[AA,BB,CC,DD] = tf2ss(B, A);
 
 ###################################################
 # c)A Kalman filter needs a state space model in the form of 
