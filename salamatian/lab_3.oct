@@ -91,7 +91,6 @@
 # N*log(1+variance(X)/P^2)-N*log(1+variance(E)/P^2)-32*k
 ###################################################
 
-
     #Let's start by filling the parameters
     [N, M] = size(data); #N is the number of observations;
     variance_x = var(data); #The variance of the real data;
@@ -263,6 +262,6 @@
 
     # Answer what would be better if we had a month of data
     printf("As it is possible to see in the plot, with the entire data")
-    printf("and with a lower order using more data we can achieve a higher benefit")
-    printf("We can then assume that if we add a all month of data")
-    printf("with lower order our benefit will be higher\n")
+    printf(" and with a lower order using more data we can achieve a higher benefit")
+    printf(" We can then assume that if we add a all month of data")
+    printf(" with lower order our benefit will be higher\n")
