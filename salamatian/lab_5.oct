@@ -134,26 +134,40 @@ printf("Don't forget: This file (lab_5.oct) depends on the prior execution of la
 ###################################################
     innov_size = size(innov)(2);
 
-    L = 1
-    threshold_upper = L*sqrt(s.Pi);
-    threshold_lower = -1 * threshold_upper;
-    positive = []
+    L = [0.01:0.05:10.01];
+    total_positives = [];
 
-    # For each event in innov
-    for i = 1:innov_size
-        if (innov(i) > threshold_upper)
-            positive(end+1) = innov(i)
-        elseif (innov(i) < threshold_lower)
-            positive(end+1) = innov(i)
-        else
-            printf("nothing")
+    for j = L
+        threshold_upper = j*sqrt(s.Pi);
+        threshold_lower = -1 * threshold_upper;
+        positive = [];
+
+        # For each event in innov
+        for i = 1:innov_size
+            if (innov(i) > threshold_upper)
+                positive(end+1) = innov(i);
+            elseif (innov(i) < threshold_lower)
+                positive(end+1) = innov(i);
+#             else
+#                 printf("nothing")
+            end
         end
+
+        total_positives(end+1) = length(positive);
     end
 
-    figure(fig++, "visible", "on");
-    plot(positive)
-    print -dpng "positives.png"
 
+    figure(fig++, "visible", "on");
+    plot(L, total_positives)
+    print -dpng "positives_by_varying_L.png"
+
+    # Question:
+    #   See the effect of changing L (from 0.01 to 10) on the anomaly detected
+    #   and describe it.
+    # Answer:
+    #   As we increase the value of L the number of positives decreases.
+    #   It is important to choose a good value of L in such a way to avoid
+    #   false positives and to minimize false negatives.
 
 ###################################################
 # f)The issue is that you do not know which anomalies are real anomalies and which one
