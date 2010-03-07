@@ -1,0 +1,13 @@
+Question 2
+
+Review of Phalanx: Withstanding multimillion node botnets
+
+This article presents Phalanx, a novel Denial of Service prevention scheme which can address botnets composed of a very large number of attacker nodes. This number is only limited by the number of nodes belonging to the "good" swarm.
+
+The main concept of the proposed algorithm is the mailbox. These blocks receive packets which are intended to a different destination and then it is up to the destination to either get this packets or to simple ignore them. This way they serve as proxies receiving and temporarily buffering traffic on behalf of end-hosts.
+
+Which flows are directed to which mailboxes is built by iterating a cryptographic hash function over a shared secret by both endpoints of the connection.
+
+But before the server knows to which mailboxes issue a get command it a first packet must be delivered by the server. This is performed by issuing periodic special packets representing connection establishment. As this type of packets is a scarce resource, attacker would attack it first rendering the rest of the algorithm useless. To avoid this problem, clients are required to either present an authentication token or to present a cryptographic puzzle solution.
+
+One side issue this algorithm causes in the network is to divide nodes in either protected nodes or nodes with mailboxes. This happens because all packets received by a protected packets must be explicitly requested by the destination (being the rest of the packets discarded). By the contrary, mailbox nodes must be able to receive packets originating from anywhere. Because of this, a protected node could never be a mailbox node simultaneously.
